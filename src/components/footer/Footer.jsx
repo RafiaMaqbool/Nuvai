@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const FooterContainer = styled.footer`
   background: #1a202c;
   color: white;
   padding: 1.5rem 1rem;
-  margin-top: 2.5rem;
   text-align: center;
 `;
 
@@ -42,8 +42,11 @@ const LinksList = styled.ul`
 
 const LinkItem = styled.li`
   margin-bottom: 0.5rem;
+`;
+
+const StyledLink = styled(Link)`
   color: white;
-  cursor: pointer;
+  text-decoration: none;
   transition: color 0.3s;
 
   &:hover {
@@ -80,22 +83,10 @@ const Copyright = styled.div`
 `;
 
 const Footer = () => {
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-
-      window.scrollTo({
-        top: sectionTop - navbarHeight, // Offset by navbar height
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <FooterContainer>
       <FooterContent>
+        {/* Company Info */}
         <FooterSection>
           <Title>Nuvai</Title>
           <Text>
@@ -103,25 +94,62 @@ const Footer = () => {
             tailored solutions to meet your specific needs.
           </Text>
         </FooterSection>
+
+        {/* Quick Links */}
         <FooterSection>
           <Title>Quick Links</Title>
           <LinksList>
-            <LinkItem onClick={() => scrollToSection("hero")}>Home</LinkItem>
-            <LinkItem onClick={() => scrollToSection("about")}>About</LinkItem>
-            <LinkItem onClick={() => scrollToSection("services")}>Services</LinkItem>
-            <LinkItem onClick={() => scrollToSection("products")}>Products</LinkItem>
+            <LinkItem>
+              <StyledLink to="/digital-infra">Digital Infra</StyledLink>
+            </LinkItem>
+            <LinkItem>
+              <StyledLink to="/industry-solution">Industry Solutions</StyledLink>
+            </LinkItem>
+            <LinkItem>
+              <StyledLink to="/consulting">Consulting</StyledLink>
+            </LinkItem>
+            <LinkItem>
+              <StyledLink to="/contact">Contact Us</StyledLink>
+            </LinkItem>
           </LinksList>
         </FooterSection>
+
+        {/* Socials */}
         <FooterSection>
           <Title>Follow Us</Title>
           <SocialIcons>
-            <a href="#"><FaFacebook size={20} /></a>
-            <a href="#"><FaTwitter size={20} /></a>
-            <a href="#"><FaInstagram size={20} /></a>
-            <a href="#"><FaLinkedin size={20} /></a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebook size={20} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter size={20} />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram size={20} />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin size={20} />
+            </a>
           </SocialIcons>
         </FooterSection>
       </FooterContent>
+
       <Copyright>
         &copy; {new Date().getFullYear()} Nuvai. All rights reserved.
       </Copyright>

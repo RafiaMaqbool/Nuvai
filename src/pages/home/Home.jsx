@@ -1,9 +1,40 @@
 import Hero from "../../components/hero/Hero"
 import Services from "../../components/services/Services";
-import Products from "../../components/products/Products";
 import About from "../../components/about/About";
-import Consulting from "../../components/consulting/Consulting";
-import Contact from "../../components/contact/Contact";
+import Approach from "../../components/approach/Approach";
+import styled, { keyframes } from "styled-components";
+
+const Contact = styled.section`
+  background: #1b93ca;
+  text-align: center;
+  padding: 80px 10%;
+  color: white;
+
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+
+  button {
+    background: #fff;
+    color: #1b93ca;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+`;
 const Home = () => {
     return (
       <div>
@@ -15,16 +46,18 @@ const Home = () => {
         </div>
         <div id="services">
           <Services />
+        </div>  
+        <div id="approach">
+          <Approach />
         </div>        
-        <div id="products">
-          <Products />
-        </div>
-        <div id="consulting">
-          <Consulting />
-        </div>
-        <div id="contact">
-          <Contact />
-        </div>
+        <Contact>
+        <h2>Ready to transform your industry?</h2>
+        <p>
+          Connect with our team to explore tailored digital transformation
+          solutions.
+        </p>
+        <button>Contact Us</button>
+      </Contact>
       </div>
     );
   };

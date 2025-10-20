@@ -1,12 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
+import businessDeal from '../../assets/business-deal.jpg';
 
 const AboutSection = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 100px 10%;
-    background-color: #EDECEC; /* Light gray background */
+    background-color: #EDECEC;
   position: relative;
 
   @media (max-width: 992px) {
@@ -34,84 +34,43 @@ const AboutContent = styled.div`
   }
 `;
 
-const HighlightText = styled.div`
-  font-size: 42px;
-  font-weight: 700;
-  background: linear-gradient(90deg, #072d4b, #1B93CA);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+const ImageWrapper = styled.div`
+  max-width: 400px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.31);
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   @media (max-width: 992px) {
-    font-size: 32px;
-    margin-bottom: 20px;
-  }
-`;
-
-const CallToAction = styled.div`
-  text-align: center;
-  background: #072d4b;
-  color: white;
-  padding: 50px;
-  border-radius: 12px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-
-  h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  button {
-    margin-top: 20px;
-    background: #1B93CA;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease-in-out;
-  }
-
-  button:hover {
-    background: #9CCADB;
+    margin-top: 40px;
   }
 `;
 
 const About = () => {
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
 
-      window.scrollTo({
-        top: sectionTop - navbarHeight, // Offset by navbar height
-        behavior: "smooth",
-      });
-    }
-  };
   return (
     <AboutSection>
       <AboutContent>
-        <h2>Innovation That Drives the Future</h2>
-        {/* <HighlightText>Empower businesses to thrive in competitive landscape.</HighlightText> */}
+        <h2>Our Mission</h2>
         <p>
-        We offer cutting-edge solutions designed to elevate efficiency, security, and innovation across diverse industries.
-        </p>
+        With a focus on integrated solutions enabling business outcomes, Nuvai empowers businesses to thrive in today's competitive landscape.        </p>
         <p>
-        Our tailored industry solutions and expert consulting services ensure remarkable growth and success for your organization.
+        Our innovative <span style={{ color: '#1B93CA', fontWeight: 700 }}>DPAC</span> (Develop – Partner – Acquire – Consult) framework ensures remarkable growth and success for clients and partners.
+      </p>
 
-        </p>
       </AboutContent>
-
-      <CallToAction>
-        <h3>Ready to Build Something Revolutionary?</h3>
-        <p>Join forces with us and turn bold ideas into reality.</p>
-        <button onClick={() => scrollToSection("contact")}>Let’s Talk</button>
-      </CallToAction>
+        <ImageWrapper>
+        <img src={businessDeal} alt="Business Deal" />
+      </ImageWrapper>
     </AboutSection>
   );
 };

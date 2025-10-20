@@ -1,86 +1,93 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo-transparent-full.png";
 
-const Nav = styled.nav`
+const NavbarContainer = styled.nav`
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
-  color: #fff;
-  width: 100%;
-  position: fixed;
+  background-color: #fff;
+  padding: 10px 7%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
   top: 0;
-  left: 0;
-  display: flex;
-  z-index: 10;
-  padding-left: 10%;
-  padding-right: 10%;
-  transition: background-color 0.3s ease-in-out;
-  background-color: ${(props) =>
-    props.isTransparent ? "transparent" : "#1a1a2e"}; 
+  z-index: 100;
 `;
 
 const Logo = styled.img`
   height: 50px;
+  width: auto;
+  object-fit: contain;
   cursor: pointer;
+`;
+
+const NavList = styled.ul`
+  flex: 1;
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 `;
 
 const NavItem = styled.li`
   display: inline-block;
-  color: white;
-  font-size: 16px;
+  margin: 10px 20px;
+  font-size: 15px;
   cursor: pointer;
-  list-style: none;
-  margin: 5px 20px;
+  color: ${({ active }) => (active ? "#1B93CA" : "#0f172a")};
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+
   &:hover {
-    color: #1A93C9;
+    color: #1B93CA;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: ${({ active }) => (active ? "100%" : "0%")};
+    height: 2px;
+    background: #1B93CA;
+    transition: width 0.3s;
+    margin: 0 auto;
+  }
+
+  &:hover::after {
+    width: 100%;
   }
 `;
 
-const Navbar = () => {
-  const [isTransparent, setIsTransparent] = useState(true);
-  const location = useLocation(); // Get the current path
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsTransparent(location.pathname === "/" && window.scrollY < 100);
-    };
+const NavBar = () => {
+  const location = useLocation();
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Set initial state
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
-
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      const navbarHeight = document.querySelector("nav")?.offsetHeight || 0;
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-  
-      window.scrollTo({
-        top: sectionTop - navbarHeight, // Offset by navbar height
-        behavior: "smooth",
-      });
-    }
-  }; 
-  
   return (
-    <Nav isTransparent={isTransparent}>
-      <Logo src={logo} alt="logo" onClick={() => navigate("/")} />
-      <ul>
-      <NavItem onClick={() => scrollToSection("about")}>About</NavItem>
-        <NavItem onClick={() => scrollToSection("services")}>Services</NavItem>
-        <NavItem onClick={() => scrollToSection("products")}>Products</NavItem>
-        <NavItem onClick={() => scrollToSection("consulting")}>Consulting</NavItem>
-        <NavItem>
-          <button className="btn" onClick={() => scrollToSection("contact")}>
-            Contact
-          </button>
-        </NavItem>
-      </ul>
-    </Nav>
+    <NavbarContainer>
+      <Logo src={logo} alt="Nuvai Logo" />
+      <NavList>
+        <StyledLink to="/">
+          <NavItem active={location.pathname === "/"}>Home</NavItem>
+        </StyledLink>
+        <StyledLink to="/digital-infra">
+          <NavItem active={location.pathname === "/digital-infra"}>Digital Infra</NavItem>
+        </StyledLink>
+        <StyledLink to="/industry-solution">
+          <NavItem active={location.pathname === "/industry-solution"}>Industry Solutions</NavItem>
+        </StyledLink>
+        <StyledLink to="/consulting">
+          <NavItem active={location.pathname === "/consulting"}>Consulting</NavItem>
+        </StyledLink>
+        <StyledLink to="/contact">
+          <NavItem active={location.pathname === "/contact"}>Contact Us</NavItem>
+        </StyledLink>
+      </NavList>
+    </NavbarContainer>
   );
-}  
+};
 
-export default Navbar;
+export default NavBar;

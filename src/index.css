@@ -20,6 +20,9 @@ a{
 padding-left: 10%;
 padding-right: 10%;
 }
+html, body {
+  overflow-x: hidden;
+}
 
 .btn {
     background: #FFF;

@@ -1,23 +1,26 @@
-import React from "react";
 import styled from "styled-components";
-import { FaShieldAlt, FaIndustry, FaHandsHelping } from "react-icons/fa";
+
+// Import your local images
+import infraImg from "../../assets/infra.jpg";
+import industryImg from "../../assets/industry.jpg";
+import consultingImg from "../../assets/consulting.jpg";
+import aiImg from "../../assets/ai.jpg";
 
 const Container = styled.div`
   margin: 80px auto;
   width: 100%;
   text-align: center;
-      // background-color: #EDECEC; /* Light gray background */
   padding-bottom: 50px;
-
 `;
+
 const P = styled.p`
-    font-size: 18px;
-    color: #444;
-    line-height: 1.6;
-    margin-top: 16px;
-        margin-bottom: 30px;
-
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  margin-top: 16px;
+  margin-bottom: 30px;
 `;
+
 const CardsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -32,10 +35,10 @@ const CardWrapper = styled.div`
 
 const CardInner = styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s;
+  transition: transform 0.6s ease;
 
   &:hover {
     transform: rotateY(180deg);
@@ -47,34 +50,36 @@ const CardFront = styled.div`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background: ${({ bg }) =>
+    `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${bg}) center/cover no-repeat`};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  background: #fff;
-  padding: 40px;
+  color: white;
+  padding: 20px;
 `;
 
 const CardBack = styled(CardFront)`
+  background: #fff;
+  color: #000;
   transform: rotateY(180deg);
-`;
-
-const IconWrapper = styled.div`
-  font-size: 50px;
-  color: #1b93ca;
-  margin-bottom: 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 `;
 
 const Title = styled.h2`
-  color: #333;
-  margin-bottom: 10px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
 `;
 
-const Description = styled.p`
-  color: #666;
-  max-width: 500px;
+const Description = styled.div`
+  color: #444;
+  font-size: 16px;
+  line-height: 1.5;
   text-align: left;
 `;
 
@@ -96,50 +101,59 @@ const services = [
         <li><strong>Cyber Security</strong></li>
         <li><strong>Application Oriented Infrastructure</strong></li>
         <li><strong>Cloud</strong></li>
-        <li><strong>Digital Video</strong></li>
-        <li><strong>AI & Automation</strong></li>
       </ul>
     ),
-    icon: <FaShieldAlt />,
+    bg: infraImg,
   },
   {
     id: 2,
     title: "Vertical Industry Solutions",
     description: (
       <ul>
-        <li><strong>Service Provider and Telco</strong> </li>
+        <li><strong>Service Provider and Telco</strong></li>
         <li><strong>Healthcare</strong></li>
         <li><strong>Banking and Fintech</strong></li>
       </ul>
     ),
-    icon: <FaIndustry />,
+    bg: industryImg,
   },
   {
     id: 3,
     title: "Consulting Services",
     description: (
       <ul>
-        <li><strong>Digital Transformation</strong> </li>
+        <li><strong>Digital Transformation</strong></li>
         <li><strong>Cloud & Modernization</strong></li>
         <li><strong>Custom Development</strong></li>
         <li><strong>Cyber Security</strong></li>
       </ul>
     ),
-    icon: <FaHandsHelping />,
+    bg: consultingImg,
+  },
+  {
+    id: 4,
+    title: "AI, Automation & Digital Videos",
+    description: (
+      <ul>
+        <li><strong>AI-driven Insights</strong></li>
+        <li><strong>Business Process Automation</strong></li>
+        <li><strong>Digital Video Solutions</strong></li>
+      </ul>
+    ),
+    bg: aiImg,
   },
 ];
 
 const Services = () => {
   return (
     <Container>
-        <H2>Empowering businesses to thrive in today's competitive world.</H2>
-        <P>Discover the power of Nuvai's innovative solutions and consulting services.</P>
+      <H2>Empowering businesses to thrive in today's competitive world.</H2>
+      <P>Discover the power of Nuvai's innovative solutions and consulting services.</P>
       <CardsContainer>
         {services.map((service) => (
           <CardWrapper key={service.id}>
             <CardInner>
-              <CardFront>
-                <IconWrapper>{service.icon}</IconWrapper>
+              <CardFront bg={service.bg}>
                 <Title>{service.title}</Title>
               </CardFront>
               <CardBack>

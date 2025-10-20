@@ -1,8 +1,9 @@
-import Hero from "../../components/hero/Hero"
+import Hero from "../../components/hero/Hero";
 import Services from "../../components/services/Services";
 import About from "../../components/about/About";
 import Approach from "../../components/approach/Approach";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Contact = styled.section`
   background: #1b93ca;
@@ -20,6 +21,10 @@ const Contact = styled.section`
     margin-bottom: 25px;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   button {
     background: #fff;
     color: #1b93ca;
@@ -35,32 +40,35 @@ const Contact = styled.section`
     }
   }
 `;
+
 const Home = () => {
-    return (
-      <div>
-        <div id="hero">
-          <Hero />
-        </div>
-        <div id="about">
-          <About />
-        </div>
-        <div id="services">
-          <Services />
-        </div>  
-        <div id="approach">
-          <Approach />
-        </div>        
-        <Contact>
+  return (
+    <div>
+      <div id="hero">
+        <Hero />
+      </div>
+      <div id="about">
+        <About />
+      </div>
+      <div id="services">
+        <Services />
+      </div>
+      <div id="approach">
+        <Approach />
+      </div>
+
+      <Contact>
         <h2>Ready to transform your industry?</h2>
         <p>
           Connect with our team to explore tailored digital transformation
           solutions.
         </p>
-        <button>Contact Us</button>
+        <Link to="/contact">
+          <button>Contact Us</button>
+        </Link>
       </Contact>
-      </div>
-    );
-  };
-  
-  export default Home;
-  
+    </div>
+  );
+};
+
+export default Home;
